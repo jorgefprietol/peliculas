@@ -2,36 +2,27 @@ import './App.css';
 import PageWrapper from './PageWrapper';
 import Paginacion from './Paginacion';
 import Pelicula from './Pelicula';
+import peliculasJson from './peliculas.json';
 import {useState} from 'react';
-
+// valores cargados desde el json
 function App() {
 	const [paginaActual, setPaginaActual] = useState(1);
-	const [peliculasData, setPeliculasData] = useState([]);
 	const TOTAL_POR_PAGINA = 2;
-	//let peliculas = peliculasJson;
-
-	const buscarPeliculas = async () => {
-		let url = 'https://61675b72ba841a001727c2e6.mockapi.io/api/peliculas/peliculas';
-		var resultado = await fetch(url, {
-			"method": 'GET',
-			"headers": {
-				"Accept": 'application/json',
-				"Content-Type": 'application/json'
-			}
-		})
-		let json = await resultado.json();
-		setPeliculasData(json);
+	let peliculas = peliculasJson;
+	
+	const cargarPeliculas = () => {
+		peliculas = peliculas.slice((paginaActual - 1) * TOTAL_POR_PAGINA, paginaActual * TOTAL_POR_PAGINA);
 	}
-	buscarPeliculas();
 	
 	const getTotalPaginas = () => {
-		let canttotalpeliculas = peliculasData.length;
+		let canttotalpeliculas = peliculasJson.length;
 		return Math.ceil(canttotalpeliculas / TOTAL_POR_PAGINA); 
 	}
 
+	cargarPeliculas();
   return (
 	  <PageWrapper>
-		{peliculasData.map(pelicula => {
+		{peliculas.map(pelicula => {
 				return (
 					<Pelicula
 						titulo={pelicula.titulo}
