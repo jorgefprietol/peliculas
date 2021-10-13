@@ -1,33 +1,30 @@
-export default function Pelicula() {
+export default function Pelicula(props) {
   return (
     <div className="movie-item-style-2">
-      <img src="images/uploads/mv1.jpg" alt="" />
+      <img src={props.imagen} alt="" />
       <div className="mv-item-infor">
         <h6>
           <a href="moviesingle.html">
-            oblivion <span>(2012)</span>
+            {props.titulo}
           </a>
         </h6>
         <p className="rate">
           <i className="ion-android-star"></i>
-          <span>8.1</span> /10
+          <span>{props.calificacion}</span> /10
         </p>
         <p className="describe">
-          Earth's mightiest heroes must come together and learn to fight as a
-          team if they are to stop the mischievous Loki and his alien army from
-          enslaving humanity...
+          {props.children}
         </p>
         <p className="run-time">
           {" "}
-          Run Time: 2h21’ . <span>MMPA: PG-13 </span> .{" "}
-          <span>Release: 1 May 2015</span>
+          Run Time: {props.duracion} . <span>MMPA: PG-13 </span> .{" "}
+          <span>Release: {props.fecha} </span>
         </p>
         <p>
-          Director: <a href="#top">Joss Whedon</a>
+          Director: <a href="#top">{props.director}</a>
         </p>
         <p>
-          Stars: <a href="#top">7777 Robert Downey Jr.,</a>{" "}
-          <a href="#top">Chris Evans,</a> <a href="#top"> Chris Hemsworth</a>
+          Stars: <a href="#top">{props.actores}</a>
         </p>
       </div>
     </div>
